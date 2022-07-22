@@ -1,0 +1,23 @@
+<div class="row">
+    <ul class="list list__blue column">
+        <li class="list-item" *ngFor="let class of classrooms">
+            <div>Mã số: {{class.id}}</div>
+            <div>Tên lớp: {{class.className}}</div>
+        </li>
+    </ul>
+
+    <form [formGroup]="classForm" class="column" method="post" (ngSubmit)="addClass(className.value)">
+        <h2>Thêm lớp</h2>
+        <div>
+            <label for="className">Tên lớp: </label>
+            <input id="className" #className formControlName="className" />
+        </div>
+
+        <div style="color: red;"
+            [hidden]="classForm.controls['className'].untouched || classForm.controls['className'].valid">
+            Class name is required.
+        </div>
+
+        <button type="submit" class="button__post">Thêm</button>
+    </form>
+</div>

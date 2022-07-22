@@ -1,0 +1,59 @@
+<div class="row">
+    <ul class="list list__blue column">
+        <li class="list-item" *ngFor="let student of students">
+            <div style="float: right;">
+                <button class="button__delete" (click)="deleteStudent(student.id)" style="display: block;">X</button>
+                <button class="button__edit" routerLink="/students/{{student.id}}" style="display: block;">></button>
+            </div>
+            <div>Mã số: {{student.id}}</div>
+            <div>Họ tên: {{student.lastName}} {{student.firstName}}</div>
+            <div>Ngày sinh: {{student.dateOfBirth}}</div>
+            <div>Số điện thoại: {{student.phone}}</div>
+        </li>
+    </ul>
+
+    <form [formGroup]="studentForm" class="column" method="post" (ngSubmit)="addStudent(selectedStudent)">
+        <h2>Thêm sinh viên</h2>
+        <div>
+            <label for="lastName">Họ: </label>
+            <input id="lastName" [(ngModel)]="selectedStudent.lastName" formControlName="lastName" />
+
+            <div style="color: red;"
+                [hidden]="studentForm.controls['lastName'].untouched || studentForm.controls['lastName'].valid">
+                Last name is required.
+            </div>
+        </div>
+
+        <div>
+            <label for="firstName">Tên: </label>
+            <input id="firstName" [(ngModel)]="selectedStudent.firstName" formControlName="firstName" />
+
+            <div style="color: red;"
+                [hidden]="studentForm.controls['firstName'].untouched ||studentForm.controls['firstName'].valid">
+                First name is required.
+            </div>
+        </div>
+
+        <div>
+            <label for="dob">Ngày sinh: </label>
+            <input type="date" id="dob" [(ngModel)]="selectedStudent.dateOfBirth" formControlName="dob" />
+
+            <div style="color: red;"
+                [hidden]="studentForm.controls['dob'].untouched ||studentForm.controls['dob'].valid">
+                Date of Birth is required.
+            </div>
+        </div>
+
+        <div>
+            <label for="phone">Số điện thoại: </label>
+            <input id="phone" [(ngModel)]="selectedStudent.phone" formControlName="phone" maxlength="10" />
+
+            <div style="color: red;"
+                [hidden]="studentForm.controls['phone'].untouched ||studentForm.controls['phone'].valid">
+                Phone is required.
+            </div>
+        </div>
+
+        <button type="submit" class="button__post">Thêm</button>
+    </form>
+</div>

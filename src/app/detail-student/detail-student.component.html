@@ -1,0 +1,51 @@
+<h2>Student Details</h2>
+
+<div *ngIf="student">
+    <form [formGroup]="detailForm" class="column" method="post">
+        <div>
+            <label for="id">ID: </label>
+            <input id="id" value="{{student.id}}" disabled />
+        </div>
+
+        <div>
+            <label for="lastName">Last Name: </label>
+            <input id="lastName" [(ngModel)]="student.lastName" formControlName="lastName" />
+
+            <div style="color: red;" *ngIf="detailForm.controls['lastName'].invalid">
+                Last name is required.
+            </div>
+        </div>
+
+        <div>
+            <label for="firstName">First Name: </label>
+            <input id="firstName" [(ngModel)]="student.firstName" formControlName="firstName" />
+
+            <div style="color: red;" *ngIf="detailForm.controls['firstName'].invalid">
+                First name is required.
+            </div>
+        </div>
+
+        <div>
+            <label for="dob">Date of Birth: </label>
+            <input id="dob" [(ngModel)]="student.dateOfBirth" formControlName="dob" />
+
+            <div style="color: red;" *ngIf="detailForm.controls['dob'].invalid">
+                Date of Birth is required.
+            </div>
+        </div>
+
+        <div>
+            <label for="phone">Phone: </label>
+            <input id="phone" [(ngModel)]="student.phone" formControlName="phone" maxlength="10" />
+
+            <div style="color: red;" *ngIf="detailForm.controls['phone'].invalid">
+                Phone is required.
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" class="button__post" style="background-color: gray;" (click)="goBack()">Back</button>
+            <button type="submit" class="button__post" (click)="updateStudent()">Save</button>
+        </div>
+    </form>
+</div>
